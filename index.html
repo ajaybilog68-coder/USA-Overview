@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>United States of America — Global Overview</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg">
+  <style>
+    :root{
+      --bg:#f5f7fa;
+      --text:#1e293b;
+      --accent:#2563eb;
+      --muted:#475569;
+      --card:#ffffff;
+      --radius:14px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif;}
+    body{background:var(--bg);color:var(--text);line-height:1.6;}
+    header{background:var(--card);padding:20px 40px;box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;}
+    .logo{font-size:1.4rem;font-weight:700;color:var(--accent);}
+    nav a{text-decoration:none;color:var(--muted);margin:0 10px;font-weight:500;transition:color 0.2s;}
+    nav a:hover{color:var(--accent);text-decoration:underline;}
+
+    .hero{max-width:1200px;margin:36px auto;padding:0 18px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;}
+    .hero-text h1{font-size:2rem;margin-bottom:12px;color:var(--accent);}
+    .hero-text p{color:var(--muted);margin-bottom:12px;font-size:0.98rem;}
+    .hero-img a img{
+      width:100%;
+      border-radius:var(--radius);
+      box-shadow:0 4px 16px rgba(0,0,0,0.08);
+      border:3px solid #e2e8f0;
+      transition:transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-img a img:hover{
+      transform:scale(1.02);
+      box-shadow:0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    section{max-width:1100px;margin:40px auto;padding:0 18px;}
+    h2{font-size:1.6rem;color:var(--accent);margin-bottom:10px;}
+    .card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.05);margin-bottom:18px;cursor:pointer;transition:all 0.3s ease;}
+    .card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.1);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px;}
+
+    /* History Button Styles */
+    .history-section {
+      text-align: center;
+      margin: 40px auto;
+      max-width: 1100px;
+      padding: 0 18px;
+    }
+    
+    .history-btn {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+      font-weight: 600;
+    }
+    
+    .history-btn:hover {
+      background-color: #1d4ed8;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    }
+
+    footer{
+      background:var(--card);
+      text-align:center;
+      padding:16px;
+      margin-top:40px;
+      color:var(--muted);
+      font-size:0.9rem;
+      border-top:1px solid rgba(0,0,0,0.05);
+    }
+
+    html{scroll-behavior:smooth;}
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background-color: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header {
+      padding: 20px 25px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .close-btn:hover {
+      color: var(--accent);
+    }
+
+    .modal-body {
+      padding: 20px 25px;
+    }
+
+    .modal-body p {
+      margin-bottom: 15px;
+    }
+
+    .modal-body ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .modal-body li {
+      margin-bottom: 8px;
+    }
+
+    /* History Timeline Styles */
+    .timeline {
+      position: relative;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: var(--accent);
+      top: 0;
+      bottom: 0;
+      left: 20px;
+      margin-left: -2px;
+    }
+
+    .timeline-item {
+      padding: 10px 20px 10px 50px;
+      position: relative;
+      background-color: inherit;
+      width: 100%;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 12px;
+      background-color: var(--card);
+      border: 4px solid var(--accent);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-period {
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+
+    .timeline-content {
+      padding: 10px 15px;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .hero-text{text-align:center;}
+      .modal-content { max-width: 95%; }
+      .timeline::after { left: 15px; }
+      .timeline-item { padding-left: 40px; }
+      .timeline-item::after { left: 7px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">USA Overview</div>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#profile">Country Profile</a>
+      <a href="#strengths">Key Strengths</a>
+      <a href="#connections">Global Connections</a>
+      <a href="#history">History</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="overview">
+    <div class="hero-text">
+      <h1>United States of America</h1>
+      <p>The United States of America (USA) plays a central role in the globalized world, serving as a leader in innovation, economy, technology, and culture. Its influence extends across international trade, politics, education, and entertainment.</p>
+      <p>As one of the world's most powerful nations, the USA is recognized for its democratic values, advanced industries, and contributions to science and technology. It remains a global hub for business, innovation, and cultural diversity.</p>
+    </div>
+    <div class="hero-img">
+      <a href="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/printable2.png?itok=4LKADTSQ" target="_blank">
+        <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/printable2.png?itok=4LKADTSQ" alt="Map of the United States of America">
+      </a>
+    </div>
+  </section>
+
+  <section id="profile">
+    <h2>Country Profile</h2>
+    <div class="grid">
+      <div class="card" data-modal="geography">
+        <h3>Geography</h3>
+        <p>The USA is located in North America, bordered by Canada to the north and Mexico to the south. It covers a vast range of landscapes and is one of the world's largest countries by area.</p>
+      </div>
+      <div class="card" data-modal="demographics">
+        <h3>Demographics</h3>
+        <p>With over 330 million people, the USA is diverse in ethnicity, language, and culture due to long histories of migration and settlement.</p>
+      </div>
+      <div class="card" data-modal="culture">
+        <h3>Culture</h3>
+        <p>American culture influences the world through media, technology, and innovation. The country is known for its universities, film industry, music, and research institutions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="strengths">
+    <h2>Key Strengths and Unique Features</h2>
+    <div class="grid">
+      <div class="card" data-modal="economy">
+        <h3>Economic Powerhouse</h3>
+        <p>One of the largest and most diversified economies globally, home to major financial centers and multinational corporations.</p>
+      </div>
+      <div class="card" data-modal="technology">
+        <h3>Technological Leadership</h3>
+        <p>Centers of research and tech innovation (e.g., Silicon Valley) drive advances in AI, software, and biotech.</p>
+      </div>
+      <div class="card" data-modal="soft-power">
+        <h3>Global Soft Power</h3>
+        <p>Strong cultural influence through entertainment, higher education, diplomacy, and international aid and trade.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="connections">
+    <h2>Global Connections</h2>
+    <div class="grid">
+      <div class="card" data-modal="economy-trade">
+        <h3>Economy & Trade</h3>
+        <p>The United States maintains extensive global economic ties through exports, multinational corporations, and international trade agreements.</p>
+      </div>
+      <div class="card" data-modal="tourism-culture">
+        <h3>Tourism & Culture</h3>
+        <p>American cultural exports, tourism destinations, and heritage sites attract millions of visitors annually and influence global culture.</p>
+      </div>
+      <div class="card" data-modal="technology-innovation">
+        <h3>Technology & Innovation</h3>
+        <p>U.S. technology hubs drive global digital transformation and maintain extensive international research collaborations.</p>
+      </div>
+      <div class="card" data-modal="migration-diaspora">
+        <h3>Migration & Diaspora</h3>
+        <p>The U.S. maintains strong connections with its global diaspora, which plays significant roles in cultural and economic exchange.</p>
+      </div>
+      <div class="card" data-modal="environmental-role">
+        <h3>Environmental Role</h3>
+        <p>The United States plays a crucial role in global climate initiatives, environmental protection, and sustainable development.</p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="history-section" id="history">
+    <h2>Explore U.S. History</h2>
+    <p>Discover the key events and periods that shaped the United States from pre-colonial times to the present day.</p>
+    <button class="history-btn" id="history-button">Explore U.S. History</button>
+  </section>
+
+
+  <div id="geography-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Geography</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States is the world's third-largest country by total area, covering approximately 3.8 million square miles (9.8 million square kilometers). It spans from the Atlantic Ocean in the east to the Pacific Ocean in the west, with diverse geographical features including:</p>
+        <ul>
+          <li>Major mountain ranges: The Rocky Mountains in the west and the Appalachian Mountains in the east</li>
+          <li>Vast interior plains: The Great Plains and the Central Lowlands</li>
+          <li>Major river systems: The Mississippi-Missouri river system, the Colorado River, and the Columbia River</li>
+          <li>Varied climate zones: From arctic conditions in Alaska to tropical climates in Hawaii and Florida</li>
+          <li>Significant natural resources: Petroleum, natural gas, coal, timber, and various minerals</li>
+        </ul>
+        <p>The country's geographical diversity supports a wide range of economic activities including agriculture, mining, and tourism, while also presenting challenges related to climate change and natural disasters.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="demographics-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Demographics</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States has a population of over 330 million people, making it the third most populous country in the world. Its demographic profile reflects centuries of immigration and internal migration patterns:</p>
+        <ul>
+          <li><strong>Ethnic Diversity:</strong> The U.S. is a multicultural society with significant populations of European, African, Asian, and Latin American descent.</li>
+          <li><strong>Languages:</strong> While English is the de facto national language, Spanish is widely spoken, and hundreds of other languages are used in communities across the country.</li>
+          <li><strong>Age Distribution:</strong> The population is aging, with the median age rising as baby boomers reach retirement and birth rates decline.</li>
+          <li><strong>Urbanization:</strong> Over 80% of Americans live in urban areas, with major metropolitan regions like New York, Los Angeles, and Chicago driving economic and cultural trends.</li>
+          <li><strong>Educational Attainment:</strong> The U.S. has one of the highest rates of tertiary education attainment among OECD countries.</li>
+        </ul>
+        <p>This demographic diversity contributes to the country's cultural richness but also presents challenges related to social integration, economic inequality, and political polarization.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="culture-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Culture</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>American culture is a dynamic blend of indigenous, European, African, and Asian influences that has evolved over centuries. Its global impact is significant across multiple domains:</p>
+        <ul>
+          <li><strong>Entertainment Industry:</strong> Hollywood dominates global cinema, while American television shows, music, and streaming content reach audiences worldwide.</li>
+          <li><strong>Higher Education:</strong> U.S. universities consistently rank among the world's best, attracting international students and faculty.</li>
+          <li><strong>Cuisine:</strong> American food culture reflects its diversity, with regional specialties and fusion cuisines gaining global popularity.</li>
+          <li><strong>Sports:</strong> American football, baseball, and basketball have passionate followings both domestically and internationally.</li>
+          <li><strong>Technological Innovation:</strong> Silicon Valley and other tech hubs drive global trends in digital culture and communication.</li>
+          <li><strong>Literature and Arts:</strong> American authors, artists, and performers have made significant contributions to global culture.</li>
+        </ul>
+        <p>This cultural influence, often called "soft power," enhances America's global standing while sometimes generating criticism about cultural imperialism.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="economy-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Economic Powerhouse</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States maintains the world's largest economy by nominal GDP, with a highly diversified economic structure that spans multiple sectors:</p>
+        <ul>
+          <li><strong>Financial Services:</strong> New York City remains the global center of finance, housing the NYSE and major investment banks.</li>
+          <li><strong>Technology and Innovation:</strong> Silicon Valley leads in software, hardware, and internet services, while other regions specialize in biotech, aerospace, and clean energy.</li>
+          <li><strong>Manufacturing:</strong> Despite globalization, the U.S. maintains strong manufacturing capabilities in automotive, aerospace, pharmaceuticals, and high-tech equipment.</li>
+          <li><strong>Agriculture:</strong> The U.S. is a major exporter of agricultural products including grains, meat, and dairy.</li>
+          <li><strong>Energy:</strong> Recent developments in shale oil and gas have made the U.S. a net energy exporter.</li>
+          <li><strong>Services Sector:</strong> Healthcare, retail, education, and professional services account for a growing share of economic activity.</li>
+        </ul>
+        <p>The U.S. dollar serves as the world's primary reserve currency, and American consumer markets drive global demand for products and services. However, the economy faces challenges including income inequality, infrastructure needs, and international competition.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="technology-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Technological Leadership</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States has been at the forefront of technological innovation for decades, with multiple regions specializing in different aspects of technology development:</p>
+        <ul>
+          <li><strong>Silicon Valley:</strong> The global epicenter of software development, venture capital, and internet companies.</li>
+          <li><strong>Boston-Cambridge Corridor:</strong> A leader in biotechnology, pharmaceuticals, and academic research.</li>
+          <li><strong>Seattle:</strong> Home to major technology and aerospace companies including Microsoft and Amazon.</li>
+          <li><strong>Austin and Research Triangle:</strong> Emerging hubs for semiconductors, clean technology, and software development.</li>
+          <li><strong>Defense Technology:</strong> Significant investment in defense-related technologies through agencies like DARPA and major defense contractors.</li>
+        </ul>
+        <p>American companies and research institutions lead in critical fields including artificial intelligence, quantum computing, biotechnology, and space exploration. The country's innovation ecosystem benefits from strong intellectual property protections, venture capital availability, and collaboration between academia and industry.</p>
+        <p>However, maintaining this leadership position requires addressing challenges in STEM education, research funding, and international competition, particularly from China and the European Union.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="soft-power-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Global Soft Power</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States wields significant soft power—the ability to shape preferences and attract others through appeal rather than coercion. This influence operates through multiple channels:</p>
+        <ul>
+          <li><strong>Entertainment and Media:</strong> Hollywood films, American television series, and music dominate global popular culture.</li>
+          <li><strong>Higher Education:</strong> U.S. universities attract the world's brightest students and scholars, creating global networks of influence.</li>
+          <li><strong>Technology Platforms:</strong> American social media, search engines, and software shape how people worldwide communicate and access information.</li>
+          <li><strong>Philanthropy:</strong> American foundations and NGOs address global challenges in health, education, and development.</li>
+          <li><strong>Business Culture:</strong> American management practices and corporate models influence global business operations.</li>
+          <li><strong>Diplomacy and Alliances:</strong> Through international organizations and bilateral relationships, the U.S. promotes its values and interests.</li>
+        </ul>
+        <p>This soft power enhances American security and economic interests by creating favorable international environments. However, it can be diminished by perceptions of American unilateralism, domestic political divisions, or controversial foreign policies.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="economy-trade-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Economy & Trade</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States maintains the world's largest economy and plays a central role in global trade networks through multiple channels:</p>
+        <ul>
+          <li><strong>Major Exports:</strong> The U.S. is a leading exporter of refined petroleum, aircraft, cars, integrated circuits, and pharmaceuticals.</li>
+          <li><strong>Trade Partnerships:</strong> The U.S. maintains significant trade relationships with Canada, Mexico, China, Japan, and the European Union.</li>
+          <li><strong>Multinational Corporations:</strong> American companies like Apple, Amazon, Microsoft, and ExxonMobil operate globally, influencing economic policies worldwide.</li>
+          <li><strong>Outsourcing:</strong> Many U.S. companies outsource manufacturing, IT services, and customer support to countries with lower labor costs.</li>
+          <li><strong>Financial Markets:</strong> Wall Street serves as the global center for capital markets, with the U.S. dollar as the world's primary reserve currency.</li>
+          <li><strong>Trade Agreements:</strong> The USMCA (replacing NAFTA) and other bilateral agreements shape regional economic integration.</li>
+        </ul>
+        <p>Despite its economic dominance, the U.S. faces challenges including trade deficits with certain partners, intellectual property disputes, and competition from emerging economies.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="tourism-culture-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Tourism & Culture</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States attracts millions of international visitors annually and exerts substantial cultural influence worldwide:</p>
+        <ul>
+          <li><strong>UNESCO World Heritage Sites:</strong> The U.S. hosts 24 UNESCO sites including Yellowstone National Park, the Grand Canyon, and Independence Hall.</li>
+          <li><strong>Major Tourist Destinations:</strong> New York City, Los Angeles, Las Vegas, Orlando, and Washington D.C. attract the majority of international visitors.</li>
+          <li><strong>Cultural Festivals:</strong> Events like Mardi Gras, Coachella, SXSW, and the Sundance Film Festival draw international participants.</li>
+          <li><strong>Cuisine:</strong> American food culture has global reach through fast food chains, but also through the popularity of regional cuisines like Tex-Mex, Southern barbecue, and California fusion.</li>
+          <li><strong>Higher Education Tourism:</strong> The U.S. hosts over 1 million international students annually, contributing significantly to local economies.</li>
+          <li><strong>Cultural Exports:</strong> Hollywood films, American television, music, and fashion trends have global audiences and influence.</li>
+        </ul>
+        <p>Tourism contributes significantly to the U.S. economy, while American cultural products shape global entertainment, fashion, and lifestyle trends.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="technology-innovation-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Technology & Innovation</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States maintains global leadership in technology and innovation through extensive international collaborations and contributions:</p>
+        <ul>
+          <li><strong>IT Hubs:</strong> Silicon Valley, Seattle, Austin, Boston, and Research Triangle Park drive global technology trends.</li>
+          <li><strong>Digital Economy:</strong> American companies dominate digital platforms, e-commerce, cloud computing, and social media.</li>
+          <li><strong>Research Collaborations:</strong> U.S. universities and research institutions maintain extensive international partnerships.</li>
+          <li><strong>Space Exploration:</strong> NASA collaborates with space agencies worldwide and leads the Artemis program for lunar exploration.</li>
+          <li><strong>Global Tech Contributions:</strong> American innovations in internet protocols, GPS, and numerous software platforms underpin global digital infrastructure.</li>
+          <li><strong>Venture Capital:</strong> U.S. venture funding supports technology startups worldwide, with Silicon Valley as the global capital for tech investment.</li>
+        </ul>
+        <p>While maintaining leadership, the U.S. faces increasing competition from China and the European Union in areas like artificial intelligence, 5G technology, and quantum computing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="migration-diaspora-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Migration & Diaspora</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States maintains complex global connections through migration patterns and its extensive diaspora communities:</p>
+        <ul>
+          <li><strong>Immigration History:</strong> The U.S. has been shaped by successive waves of immigration from Europe, Asia, Latin America, and Africa.</li>
+          <li><strong>American Diaspora:</strong> Approximately 9 million U.S. citizens live abroad, with significant communities in Mexico, Canada, the UK, and Australia.</li>
+          <li><strong>Remittances:</strong> The U.S. is the source of significant remittance flows to countries like Mexico, China, India, and the Philippines.</li>
+          <li><strong>Dual Citizenship:</strong> Many Americans maintain connections to ancestral homelands through dual citizenship and cultural preservation.</li>
+          <li><strong>Cultural Exchange:</strong> American diaspora communities facilitate cultural exchange and business connections between the U.S. and their countries of residence.</li>
+          <li><strong>Global Professionals:</strong> American expatriates often work in multinational corporations, international organizations, education, and humanitarian sectors.</li>
+        </ul>
+        <p>These migration patterns create transnational networks that influence economic development, cultural exchange, and diplomatic relations between the U.S. and other countries.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="environmental-role-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Environmental Role</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The United States plays a significant and complex role in global environmental issues and climate initiatives:</p>
+        <ul>
+          <li><strong>Climate Change Leadership:</strong> Despite periodic policy shifts, the U.S. has been instrumental in international climate agreements including the Paris Agreement.</li>
+          <li><strong>Carbon Emissions:</strong> The U.S. is the second-largest emitter of greenhouse gases globally, giving it substantial responsibility in climate mitigation efforts.</li>
+          <li><strong>Renewable Energy:</strong> American companies lead in renewable energy innovation, particularly in solar, wind, and battery technologies.</li>
+          <li><strong>Environmental Protection:</strong> The EPA and various state agencies implement environmental regulations that often set global standards.</li>
+          <li><strong>International Conservation:</strong> The U.S. supports global conservation efforts through funding, research, and participation in international environmental organizations.</li>
+          <li><strong>Sustainable Development:</strong> American NGOs, foundations, and corporations play significant roles in promoting sustainable development worldwide.</li>
+        </ul>
+        <p>The U.S. faces the challenge of balancing economic growth with environmental protection, while its climate policies have global implications due to the country's economic influence and carbon footprint.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="history-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>U.S. History Timeline</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-period">🏞️ Pre-Colonial and Native Era (Before 1492)</div>
+            <div class="timeline-content">
+              Before European exploration, the Americas were home to millions of Indigenous peoples with diverse cultures and societies—such as the Iroquois, Cherokee, Sioux, Navajo, and many others. They lived across the continent in complex communities with trade, agriculture, and governance systems.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">🚢 European Exploration and Colonization (1492–1776)</div>
+            <div class="timeline-content">
+              1492: Christopher Columbus's voyage for Spain marked the beginning of European exploration in the Americas.<br><br>
+              1607: The first permanent English colony was established in Jamestown, Virginia.<br><br>
+              Over the next 150 years, Britain founded 13 colonies along the Atlantic coast.<br><br>
+              Tensions grew as colonists resented British taxes and lack of representation.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">⚔️ The American Revolution (1775–1783)</div>
+            <div class="timeline-content">
+              1775: The Revolutionary War began between the colonies and Great Britain.<br><br>
+              1776: The Declaration of Independence, written mainly by Thomas Jefferson, proclaimed the colonies' independence on July 4.<br><br>
+              With help from France, the colonies defeated Britain.<br><br>
+              1783: The Treaty of Paris formally ended the war, recognizing the United States of America as an independent nation.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">🏛️ Nation Building (1787–1860)</div>
+            <div class="timeline-content">
+              1787: The U.S. Constitution was written, creating a federal government with checks and balances.<br><br>
+              1789: George Washington became the first President.<br><br>
+              The U.S. expanded westward through purchases (like the Louisiana Purchase in 1803) and treaties.<br><br>
+              Deep divisions grew over slavery, economics, and state rights.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">⚔️ Civil War and Reconstruction (1861–1877)</div>
+            <div class="timeline-content">
+              1861: The Civil War erupted between the North (Union) and South (Confederacy) over slavery and secession.<br><br>
+              1863: President Abraham Lincoln issued the Emancipation Proclamation, freeing enslaved people in Confederate states.<br><br>
+              1865: The Union won; slavery was abolished by the 13th Amendment, but the South faced devastation.<br><br>
+              Reconstruction (1865–1877): Efforts to rebuild and integrate freed African Americans into society were met with resistance and racial discrimination.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">🏗️ Industrialization and Expansion (1877–1914)</div>
+            <div class="timeline-content">
+              Rapid industrial growth transformed the U.S. into a major economic power.<br><br>
+              Millions of immigrants arrived from Europe and Asia.<br><br>
+              Cities expanded, and innovations like electricity, railroads, and telephones reshaped daily life.<br><br>
+              Native Americans were forcibly relocated as settlers moved west.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">🌍 World Wars and the Great Depression (1914–1945)</div>
+            <div class="timeline-content">
+              World War I (1917–1918): The U.S. joined the Allies, helping end the war.<br><br>
+              1920s: Economic prosperity and cultural change (the "Roaring Twenties").<br><br>
+              1929: The Great Depression caused massive unemployment and poverty.<br><br>
+              World War II (1941–1945): The U.S. entered after Japan attacked Pearl Harbor. The Allies defeated Germany and Japan, and the U.S. emerged as a global superpower.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">🌐 Cold War Era (1945–1991)</div>
+            <div class="timeline-content">
+              The U.S. and the Soviet Union became rival superpowers.<br><br>
+              The period was marked by nuclear arms races, the Korean War, the Vietnam War, and the Space Race.<br><br>
+              Domestically, the Civil Rights Movement (1950s–60s) fought racial segregation and inequality, led by figures like Martin Luther King Jr.<br><br>
+              1991: The Cold War ended with the collapse of the Soviet Union.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-period">💻 Modern Era (1991–Present)</div>
+            <div class="timeline-content">
+              The 1990s saw rapid technological growth and the rise of the internet.<br><br>
+              2001: The September 11 terrorist attacks led to wars in Afghanistan and Iraq.<br><br>
+              The 2008 financial crisis caused global recession.<br><br>
+              2008: Barack Obama became the first African American president.<br><br>
+              Recent years have seen political polarization, social movements (e.g., Black Lives Matter), and challenges like the COVID-19 pandemic.<br><br>
+              The U.S. remains one of the most influential nations in global politics, economy, science, and culture.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 | United States of America Global Overview — Designed with pure HTML & CSS.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      const cards = document.querySelectorAll('.card[data-modal]');
+      
+
+      const modals = document.querySelectorAll('.modal');
+      
+     
+      const closeButtons = document.querySelectorAll('.close-btn');
+      
+      const historyButton = document.getElementById('history-button');
+	  
+      const historyModal = document.getElementById('history-modal');
+      
+    
+      cards.forEach(card => {
+        card.addEventListener('click', function() {
+          const modalId = this.getAttribute('data-modal') + '-modal';
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+          }
+        });
+      });
+      
+
+      historyButton.addEventListener('click', function() {
+        historyModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+      });
+      
+      
+      closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const modal = this.closest('.modal');
+          if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        });
+      });
+      
+      
+      modals.forEach(modal => {
+        modal.addEventListener('click', function(e) {
+          if (e.target === this) {
+            this.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+          }
+        });
+      });
+      
+    
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          modals.forEach(modal => {
+            if (modal.style.display === 'flex') {
+              modal.style.display = 'none';
+              document.body.style.overflow = 'auto'; 
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
